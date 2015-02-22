@@ -69,7 +69,7 @@ class TagField extends TextField {
 	/**
 	 * @var $separator Determines on which character to split tags in a string.
 	 */
-	protected $separator = ' ';
+	protected $separator = ', ';
 	
 	protected static $separator_to_regex = array(
 		' ' => '\s',
@@ -337,9 +337,8 @@ class TagField extends TextField {
 			}
 		}
 		// remove duplicates (retains case sensitive duplicates)
-		$filteredTagArr = array_unique($filteredTagArr);
-		
-		return $filteredTagArr;
+		$filteredTagArr = array_unique($filteredTagArr, SORT_REGULAR);
+		return array_values($filteredTagArr);
 	}
 	
 	public function setTagFilter($sql) {
